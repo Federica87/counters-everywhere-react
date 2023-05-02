@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Header from "./components/molecules/Header";
+import Counter from "./components/molecules/Counter";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [idCounters, setIdCounters] = useState([]);
+
+  return React.createElement(
+    "div",
+    { className: "container" },
+    React.createElement(Header, {
+      idCounters: idCounters,
+      setIdCounters: setIdCounters,
+    }),
+    React.createElement(
+      "ul",
+      null,
+      idCounters.map((id) => React.createElement(Counter, { id: id, key: id }))
+    )
   );
 }
 
