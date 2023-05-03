@@ -16,7 +16,14 @@ function App() {
     React.createElement(
       "ul",
       null,
-      idCounters.map((id) => React.createElement(Counter, { id: id, key: id }))
+      idCounters.map((id) =>
+        React.createElement(Counter, {
+          id: id,
+          key: id,
+          idCounters: idCounters,
+          setIdCounters: setIdCounters,
+        })
+      )
     )
   );
 }

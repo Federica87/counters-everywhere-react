@@ -1,6 +1,6 @@
 import React from "react";
 
-function Display() {
-  return React.createElement("p", null, "0");
+function Display({ counter }) {
+  return React.createElement("p", null, `${counter}`);
 }
 export default Display;
