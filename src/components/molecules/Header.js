@@ -6,6 +6,29 @@ import Input from "../atoms/Input";
 function Header({ idCounters, setIdCounters }) {
   const [counterNumber, setCounterNumber] = useState(0);
 
+  function handleInputCounter(e) {
+    if (e.target.value !== "") {
+      if (e.target.value.match(/^[0-9]+$/) && e.target.value >= 0) {
+        let minus = e.target.value - idCounters.length;
+        let tempCounterNumber = counterNumber;
+        let tempIdCounters = [...idCounters];
+
+        if (minus > 0) {
+          for (let i = 0; i < minus; i++) {
+            tempCounterNumber += 1;
+            tempIdCounters.push(tempCounterNumber);
+          }
+        } else if (minus < 0) {
+          for (let i = 0; i > minus; i--) {
+            tempIdCounters.pop();
+          }
+        }
+        setCounterNumber(tempCounterNumber);
+        setIdCounters(tempIdCounters);
+      } else alert("The value is not value");
+    }
+  }
+
   return React.createElement(
     "header",
     null,
@@ -15,11 +38,16 @@ function Header({ idCounters, setIdCounters }) {
       event: () => {
         setCounterNumber(counterNumber + 1);
         setIdCounters((old) => [...old, counterNumber + 1]);
-        console.log(idCounters);
       },
     }),
-    React.createElement(Input),
-    React.createElement(Button, { buttonName: "Remove Counter" })
+    React.createElement(Input, {
+      value: idCounters.length,
+      event: (e) => handleInputCounter(e),
+    }),
+    React.createElement(Button, {
+      buttonName: "Remove Counter",
+      event: () => setIdCounters(idCounters.slice(0, -1)),
+    })
   );
 }
 
