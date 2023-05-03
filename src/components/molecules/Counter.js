@@ -22,6 +22,7 @@ function Counter({ id, idCounters, setIdCounters }) {
         let index = tempIdCounters.findIndex((counter) => counter === id);
         tempIdCounters.splice(index, 1);
         setIdCounters(tempIdCounters);
+        break;
       default:
         return counter;
     }
